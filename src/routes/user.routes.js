@@ -12,6 +12,8 @@ import {
   publicMerchantByUniqueId,
 } from "../controllers/merchant.controllers.js";
 import { getAllPaymentProviders } from "../controllers/paymentProvider.controllers.js";
+import { getAllNfts } from "../old.js";
+import { createCrossmintCollection, createCrossmintCollectionBasic, createCrossmintTemplate, listCrossmintCollections } from "../controllers/nft.controllers.js";
 
 const router = Router();
 
@@ -38,5 +40,10 @@ router.post("/uid/generate", verifyJWT, requireMerchant, generateEphemeralUID);
 router.get("/uids", verifyJWT, requireMerchant, getAllGeneratedUIDs);
 
 router.get("/:uniqueId", publicMerchantByUniqueId);
+router.get("/nfts", getAllNfts);
+router.post("/nftss", createCrossmintCollection);
+router.post("/nft-templates", createCrossmintTemplate);
+router.post("/nft-collections", createCrossmintCollectionBasic);
+router.get("/nft-collections", listCrossmintCollections);
 
 export default router;
